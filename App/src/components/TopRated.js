@@ -1,10 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-// import url from './axios'
 import { Link } from 'react-router-dom'
-// import Details from './Details'
-// import db  from '../firebase'
-// import firebaseApp from '../firebase'
 import { useSelector } from 'react-redux'
 import { selectTopRated } from '../features/movie/movieSlice'
 
