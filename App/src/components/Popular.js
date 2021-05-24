@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectPopular } from '../features/movie/movieSlice'
 
-
+ 
 function Popular({ title }) {
 
     const popular = useSelector(selectPopular);

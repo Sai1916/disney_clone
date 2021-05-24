@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectUpcoming } from '../features/movie/movieSlice'
 
-
+ 
 function Upcoming({ title }) {
 
     const upcoming = useSelector(selectUpcoming);

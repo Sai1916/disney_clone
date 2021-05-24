@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectTrending } from '../features/movie/movieSlice'
 
-
+ 
 function Trending({ title }) {
 
     const trending = useSelector(selectTrending);

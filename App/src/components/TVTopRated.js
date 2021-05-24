@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectTvTopRated } from '../features/movie/movieSlice'
 
-
+ 
 function TVTopRated({ title }) {
 
     const tv_top_rated = useSelector(selectTvTopRated);

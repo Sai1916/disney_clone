@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectNowPlaying } from '../features/movie/movieSlice'
 
-
+ 
 function NowPlaying({ title }) {
 
     const now_playing = useSelector(selectNowPlaying);
