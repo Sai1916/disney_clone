@@ -14,7 +14,7 @@ const movieSlice = createSlice({
     name: 'movie',
     initialState,
     reducers : {
-        setMovies : (state,action) => {
+        setMovies : (state,action) => {  
             state.popular = action.payload.popular;
             state.now_playing = action.payload.now_playing;
             state.trending = action.payload.trending;
