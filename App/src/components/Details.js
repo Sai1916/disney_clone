@@ -61,7 +61,7 @@ function Details() {
                         {res.date}
                     </SubTitle>
                     <Description>
-                    {res.description}
+                        {res.description}
                     </Description>
                 </>
             )}
@@ -87,6 +87,10 @@ const BackgroundImage = styled.div`
     img{
         width: 100%;
     }
+
+    @media (max-width: 768px){
+        top: 70px;
+    }
 `
 const Title = styled.div`
     height: 30vh;
@@ -102,6 +106,11 @@ const Title = styled.div`
         object-fit: contain;
         border: 0.2px solid white;
         border-radius: 8px;
+
+        @media (max-width: 425px){
+            width: 80px;
+            height: 100%;
+        }
     }
 `
 const Controls = styled.div`
@@ -124,6 +133,15 @@ const PlayButton = styled.button`
 
     &:hover{
         background: rgb(198,198,198);
+    }
+
+    @media (max-width: 425px){
+        height: 30px;
+        font-size: 10px;
+        padding: 0px 18px;
+        img{
+            width: 20px;
+        }
     }
 `
 const TrailerButton = styled(PlayButton)`
@@ -148,6 +166,11 @@ const AddButton = styled.button`
         font-size: 26px;
         color: white;
     }
+
+    @media (max-width: 425px){
+        width: 30px;
+        height: 30px;
+    }
 `
 const GroupWatchButton = styled(AddButton)`
     background: rgb(0, 0, 0);
@@ -158,11 +181,19 @@ const SubTitle = styled.div`
     min-height: 20px;
     margin-top: 26px;
     color: '#fff'
+
+    @media (max-width: 425px){
+       font-size: 12px;
+    }
 `
 const Description = styled.div`
     line-height: 1.5;
     font-size: 18px;
     margin-top: 16px;
     color: rgb(249,249,249);
+
+    @media (max-width: 425px){
+        font-size: 12px;
+    }
 `
 export default Details

@@ -19,6 +19,11 @@ const Icons = styled.div`
     padding:25px 0px;
     grid-template-columns: repeat(5,minmax(0,1fr));
     grid-gap:20px;
+
+    @media(max-width: 425px){
+        display: flex;
+        flex-direction: column;
+    }
 `
 const Icon = styled.img`
     height:100%;

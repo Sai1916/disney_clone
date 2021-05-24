@@ -159,6 +159,26 @@ const NavItems = styled.div`
                 opacity:1;
             }
         }
+
+        // @media (max-width: 600px){
+        //   display: none;
+        // }
+
+        @media (max-width: 768px){
+            a{
+
+              img{
+                height: 14px;
+              }
+            }
+            span{
+              display: none;
+            }
+        }
+
+        @media (max-width: 560px){
+          display: none;
+        }
     }
 `
 const Login = styled.a`
@@ -180,6 +200,10 @@ const Login = styled.a`
 
 const UserProfImg= styled.img`
   height: 100%;
+
+  @media (max-width: 768px){
+    height: 70%;
+  }
 `
 
 const DropDown = styled.div`
@@ -210,6 +234,11 @@ const SignOut = styled.div`
     border-radius: 50%;
     width: 100%;
     height: 100%;
+
+    @media (max-width: 768px){
+      height: 80%;
+      width: 80%;
+    }
   }
   &:hover {
     ${DropDown} {

@@ -61,6 +61,11 @@ const Items = styled.div`
         :hover{
             transform: scale(1.02)
         }
+        
+        @media (max-width: 425px){
+            width: 100px;
+            height: 100%;
+        }
     }
 
 `
