@@ -1,31 +1,95 @@
-import React from 'react'
-import styled from 'styled-components'
-import ImageSlider from './ImageSlider'
-import Movies from './Movies'
-import ViewIcons from './ViewIcons'
-import db from '../firebase'
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { setMovies } from '../features/movie/movieSlice'
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-lone-blocks */
+import React from 'react';
+import styled from 'styled-components';
+import ImageSlider from './ImageSlider';
+import ViewIcons from './ViewIcons';
+import Trending from './Trending';
+import db from '../firebase';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMovies } from '../features/movie/movieSlice';
+import Upcoming from './Upcoming';
+import NowPlaying from './NowPlaying';
+import TopRated from './TopRated';
+import Popular from './Popular';
+import TVTopRated from './TVTopRated';
+import TVAiringToday from './TVAiringToday';
+import { selectUserName } from "../features/user/userSlice";
 
 function Home() {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const userName = useSelector(selectUserName);
 
-    useEffect(() => {
-        db.collection('movies Popular').onSnapshot((snapshot) => {
-            let movies = snapshot.docs.map((doc) => {
-                return {id: doc.id, ...doc.data()}
-            })
-            dispatch(setMovies(movies))
-        })
-    })
+    let populars =[];
+    let trendings =[];
+    let upcomings =[];
+    let now_playings =[];
+    let topRateds =[];
+    let tv_airing_todays =[];
+    let tv_topRateds =[];
+     
+                        useEffect(() => {
+                            db.collection("movies").onSnapshot((snapshot) => {
+                              snapshot.docs.map((doc) => {
+                                console.log(populars);
+                                switch (doc.data().type) {
+                                  case "popular":
+                                    // eslint-disable-next-line react-hooks/exhaustive-deps
+                                    populars = [...populars, { id: doc.id, ...doc.data() }];
+                                    break;
+                        
+                                  case "now_playing":
+                                    now_playings = [...now_playings, { id: doc.id, ...doc.data() }];
+                                    break;
+                        
+                                  case "trending":
+                                    trendings = [...trendings, { id: doc.id, ...doc.data() }];
+                                    break;
+                        
+                                  case "upcoming":
+                                    upcomings = [...upcomings, { id: doc.id, ...doc.data() }];
+                                    break;
+                                  case "top_rated":
+                                    topRateds = [...topRateds, { id: doc.id, ...doc.data() }];
+                                    break;  
+                                    case "tv_top_rated":
+                                        tv_topRateds = [...tv_topRateds, { id: doc.id, ...doc.data() }];
+                                        break;
+                                        case "tv_airing_today":
+                                            tv_airing_todays = [...tv_airing_todays, { id: doc.id, ...doc.data() }];
+                                            break;           
+                                   default: console.log("done"); 
+                                }
+                                return "done";
+                            });
+                        
+                              dispatch(
+                                setMovies({
+                                  popular: populars,
+                                  trending: trendings,
+                                  upcoming: upcomings,
+                                  now_playing: now_playings,
+                                  tv_airing_today: tv_airing_todays,
+                                  top_rated: topRateds,
+                                  tv_top_rated: tv_topRateds,
+                                })
+                              );
+                            })
+                          },[userName]);
 
     return (
         <Container>
             <ImageSlider />
             <ViewIcons />
-            <Movies />
+            <Popular title="Popular" />
+            <Trending title="Trending" />
+            <Upcoming title="Upcoming" />
+            <TVTopRated title="TV TopRated" />
+            <NowPlaying title="Now Playing"/>
+            <TopRated title="Top Rated" />
+            <TVAiringToday title="TV Airing Today"/>
         </Container>
     )
 }

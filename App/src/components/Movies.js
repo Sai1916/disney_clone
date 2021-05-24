@@ -1,18 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
-import Movie from './Movie'
-import requests from './requests'
+import Movie from './Popular'
+// import requests from './requests'
+import { useSelector } from 'react-redux'
+import { selectPopular } from '../features/movie/movieSlice'
 
 function Movies() {
+
+    const movies = useSelector(selectPopular)
+
     return (
         <Container>
+            {
+                movies && movies.map((movie) => (
+                        <Movie movie={movie} title={movie}/> 
+                    )
+                )
+            }
             
-            <Movie fetchUrl={requests.popular} title="Popular"/>
-            <Movie fetchUrl={requests.trending} title="Trending"/> 
-            <Movie fetchUrl={requests.topRated} title="Top Rated"/> 
-            <Movie fetchUrl={requests.tv_airing_today} title="TV Airing Today"/>
-            <Movie fetchUrl={requests.tv_topRated} title="TV Top Rated"/>
-
         </Container>
     )
 }

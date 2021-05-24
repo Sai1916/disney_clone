@@ -10,8 +10,10 @@ function Details() {
 
     const [res,setRes] = useState();
 
+    const base_url="https://image.tmdb.org/t/p/original";
+
     useEffect(() => {
-        db.collection('movies Popular')
+        db.collection('movies')
         .doc(id)
         .get()
         .then((doc) => {
@@ -31,32 +33,38 @@ function Details() {
 
     return (
         <Container>
-            <BackgroundImage>
-                <img src="" alt="" />
-            </BackgroundImage>
-            <Title>
-                <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/D7AEE1F05D10FC37C873176AAA26F777FC1B71E7A6563F36C6B1B497CAB1CEC2/scale?width=1440&aspectRatio=1.78" alt=""/>
-            </Title>
-            <Controls>
-                <PlayButton>
-                    <img src="/images/play-icon-black.png" alt="" />
-                    <span>PLAY</span>
-                </PlayButton>
-                <TrailerButton>
-                    <img src="/images/play-icon-white.png" alt="" />
-                    <span>TRAILER</span>
-                </TrailerButton>
-                <AddButton>
-                    <span>+</span>
-                </AddButton>
-                <GroupWatchButton>
-                    <img src="/images/group-icon.png" alt="" />
-                </GroupWatchButton>
-            </Controls>
-            <SubTitle></SubTitle>
-            <Description>
-               {/* {res.description} */}
-            </Description>
+            {res && (
+                <>
+                    <BackgroundImage>
+                        <img src={`${base_url}${res.backdrop_path}`} alt="bgimg" />
+                    </BackgroundImage>
+                    <Title>
+                        <img src={`${base_url}${res.poster_path}`} alt="titleimg"/>
+                    </Title>
+                    <Controls>
+                        <PlayButton>
+                            <img src="/images/play-icon-black.png" alt="" />
+                            <span>PLAY</span>
+                        </PlayButton>
+                        <TrailerButton>
+                            <img src="/images/play-icon-white.png" alt="" />
+                            <span>TRAILER</span>
+                        </TrailerButton>
+                        <AddButton>
+                            <span>+</span>
+                        </AddButton>
+                        <GroupWatchButton>
+                            <img src="/images/group-icon.png" alt="" />
+                        </GroupWatchButton>
+                    </Controls>
+                    <SubTitle>
+                        {res.date}
+                    </SubTitle>
+                    <Description>
+                    {res.description}
+                    </Description>
+                </>
+            )}
         </Container>
     )
 }
@@ -75,17 +83,25 @@ const BackgroundImage = styled.div`
     bottom: 0;
     z-index: -1;
     opacity: 0.8;
+
+    img{
+        width: 100%;
+    }
 `
 const Title = styled.div`
     height: 30vh;
-    min-height: 160px;
-    width: 35vw;
-    min-width: 200px;
+    min-height: 200px;
+    width: 140px;
+    height: 100%;
+    margin: 20px;
+    
     
     img{
         width: 100%;
         height: 100%;
         object-fit: contain;
+        border: 0.2px solid white;
+        border-radius: 8px;
     }
 `
 const Controls = styled.div`
@@ -145,7 +161,7 @@ const SubTitle = styled.div`
 `
 const Description = styled.div`
     line-height: 1.5;
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 16px;
     color: rgb(249,249,249);
 `
